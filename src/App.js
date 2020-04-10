@@ -31,8 +31,10 @@ function App() {
   const options = {
     animationEnabled: true,	
     title:{
-      text: "Number of Confirmed Cases"
+      text: "Covid 19 Data"
     },
+    height:420,
+    width:1200,
     axisY : {
       title: "NumberOfCases",
       includeZero: true
