@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Navigation from './Navigation';
+import GraphComponent from './GraphComponent';
 
-describe('<Navigation />', () => {
+describe('<GraphComponent />', () => {
   test('renders', () => {
-    const wrapper = shallow(<Navigation />);
+    const wrapper = shallow(<GraphComponent />);
     expect(wrapper).toMatchSnapshot();
   });
 });
