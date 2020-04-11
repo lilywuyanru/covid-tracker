@@ -18,25 +18,28 @@ const client = new ApolloClient({
   link
 })
 
+const queryResults = gql`
+  query queryResults($today: String!){
+    results (countries: "Canada", date: { lt: $today }) {
+      country {
+        name
+      }
+      date
+      confirmed
+      deaths
+      recovered
+    }
+  }`;
+
+var today = new Date();
+var date=today.getDate() + "-"+ parseInt(today.getMonth()+1) +"-"+today.getFullYear();
 export class GraphComponent extends Component {
   render() {
   return (
     <ApolloProvider client={client}>
       <Query
-        query={gql`
-        {
-          results (countries: "Canada", date: { lt: "4/9/2020" }) {
-            country {
-              name
-            }
-            date
-            confirmed
-            deaths
-            recovered
-            growthRate
-          }
-        }
-        `}
+        query={queryResults} 
+        variables = {{today: date}}
       >
         {({ loading, error, data }) => {
           if (loading) return <p>Loading...</p>;
@@ -44,10 +47,11 @@ export class GraphComponent extends Component {
           
           var confirmed_array = [];
           var death_case_array = [];
-          
+          var recovered_array = [];
           data && data.results && data.results.map((result) => {
             confirmed_array.push({ y: result.confirmed, label: result.date })
             death_case_array.push({ y: result.deaths, label: result.date })
+            recovered_array.push({ y: result.recovered, label: result.date })
           });
           
           const options = {
@@ -75,6 +79,12 @@ export class GraphComponent extends Component {
               name: "death",
               showInLegend: true,
               dataPoints: death_case_array
+            },
+            {
+              type: "spline",
+              name: "recovered",
+              showInLegend: true,
+              dataPoints: recovered_array
             }]
           }
 
