@@ -2,20 +2,15 @@ import React from 'react';
 import './App.css';
 import { Navigation } from './components/Navigation/Navigation.js';
 import { GraphComponent } from './components/GraphComponent/GraphComponent.js';
-
-import { useQuery } from '@apollo/react-hooks';
-import gql from "graphql-tag";
-
-import CanvasJSReact from './canvasjs.react';
-//var CanvasJSReact = require('./canvasjs.react');
-// var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-
+import { SearchSelection } from './components/SearchSelection/SearchSelection.js';
 
 function App() {
   return (
     <div className="App">
         <Navigation />
+        <br />
+        <SearchSelection />
+        <br />
         <GraphComponent />
 
         {/* <div className="container">
