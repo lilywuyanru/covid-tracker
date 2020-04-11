@@ -7,6 +7,7 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { GraphComponent } from '../GraphComponent/GraphComponent.js';
+import { CardComponent } from '../CardComponent/CardComponent.js';
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
@@ -19,7 +20,6 @@ const client = new ApolloClient({
 })
 
 export class SearchSelection extends Component {
-
   state = {
     selectedOption: {
       value: null,
@@ -63,6 +63,9 @@ export class SearchSelection extends Component {
               onChange={this.handleChange}
               options={country_array}
             />
+            <br />
+            <CardComponent countrySelected={selectedOption}/>
+            <br />
             <GraphComponent countrySelected={selectedOption}/>
           </div>
         );

@@ -7,6 +7,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
+import {QUERY_BY_COUNTRY} from '../QueryComponent/QueryComponent.js'
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const cache = new InMemoryCache();
@@ -22,19 +23,6 @@ const client = new ApolloClient({
 var today = new Date();
 var date=today.getDate() + "-"+ parseInt(today.getMonth()+1) +"-"+today.getFullYear();
 // $countryValue: String!,
-const queryResults = gql`
-  query queryResults($country: [String], $today:String!){
-    results (countries: $country, date: { lt: $today }) {
-      country {
-        name
-      }
-      date
-      confirmed
-      deaths
-      recovered
-    }
-  }`;
-
 
 export class GraphComponent extends Component {
   constructor(props) {
@@ -47,7 +35,7 @@ export class GraphComponent extends Component {
   return (
     <ApolloProvider client={client}>
       <Query
-        query={queryResults} 
+        query={QUERY_BY_COUNTRY} 
         variables = {{country: countrySelected, today: date}}
       >
         {({ loading, error, data }) => {
