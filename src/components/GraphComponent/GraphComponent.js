@@ -1,3 +1,4 @@
+ // eslint-disable-next-line
 import React, { Component } from 'react';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
@@ -18,9 +19,12 @@ const client = new ApolloClient({
   link
 })
 
+var today = new Date();
+var date=today.getDate() + "-"+ parseInt(today.getMonth()+1) +"-"+today.getFullYear();
+// $countryValue: String!,
 const queryResults = gql`
-  query queryResults($today: String!){
-    results (countries: "Canada", date: { lt: $today }) {
+  query queryResults($country: [String], $today:String!){
+    results (countries: $country, date: { lt: $today }) {
       country {
         name
       }
@@ -31,15 +35,20 @@ const queryResults = gql`
     }
   }`;
 
-var today = new Date();
-var date=today.getDate() + "-"+ parseInt(today.getMonth()+1) +"-"+today.getFullYear();
+
 export class GraphComponent extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    const countrySelected = this.props.countrySelected.value;
+    console.log(typeof countrySelected)
   return (
     <ApolloProvider client={client}>
       <Query
         query={queryResults} 
-        variables = {{today: date}}
+        variables = {{country: countrySelected, today: date}}
       >
         {({ loading, error, data }) => {
           if (loading) return <p>Loading...</p>;

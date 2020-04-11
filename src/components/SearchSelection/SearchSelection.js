@@ -6,7 +6,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
-
+import { GraphComponent } from '../GraphComponent/GraphComponent.js';
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
@@ -21,11 +21,14 @@ const client = new ApolloClient({
 export class SearchSelection extends Component {
 
   state = {
-    selectedOption: null,
+    selectedOption: {
+      value: null,
+      lable: null
+    }
   };
+
   handleChange = selectedOption => {
     this.setState({ selectedOption });
-    console.log(`Country selected:`, selectedOption);
   };
 
   render() {
@@ -51,6 +54,7 @@ export class SearchSelection extends Component {
           data && data.countries && data.countries.map((country) => {
             country_array.push({value: country.name, label: country.name})
           });
+          console.log(country_array)
                 
         return(
           <div>
@@ -59,6 +63,7 @@ export class SearchSelection extends Component {
               onChange={this.handleChange}
               options={country_array}
             />
+            <GraphComponent countrySelected={selectedOption}/>
           </div>
         );
         

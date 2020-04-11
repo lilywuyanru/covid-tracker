@@ -11,7 +11,7 @@ function App() {
         <br />
         <SearchSelection />
         <br />
-        <GraphComponent />
+        {/* <GraphComponent /> */}
 
         {/* <div className="container">
           {data &&
