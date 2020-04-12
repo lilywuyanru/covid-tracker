@@ -1,33 +1,33 @@
 import React from 'react';
 import './App.css';
 import { Navigation } from './components/Navigation/Navigation.js';
-import { GraphComponent } from './components/GraphComponent/GraphComponent.js';
 import { SearchSelection } from './components/SearchSelection/SearchSelection.js';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-        <Navigation />
-        <br />
-        <SearchSelection />
-        <br />
-        {/* <GraphComponent /> */}
-
-        {/* <div className="container">
-          {data &&
-            data.results &&
-            data.results.map((result, index) => (
-               <div>
-                  <p>date: {result.date}</p>
-                  <p>country: {result.country.name}</p>
-                  <p>confirmed: {result.confirmed}</p>
-                  <p>deaths: {result.deaths}</p>
-                  <p>recovered: {result.recovered}</p>
-                  <p>growthRate: {result.growthRate}</p>
-                  <br/>
+        <Router>
+          <Navigation />
+          <br />
+          <Switch>
+            <Route exact path="/">
+              <div class="content" align="center">
+                <SearchSelection />
               </div>
-            ))}
-        </div> */}
+            </Route>
+            <Route exact path="/about">
+              <div class="content" align="center">
+                <h1>just tryna figure out routes</h1>
+              </div>
+            </Route>
+          </Switch>
+        </Router>
     </div>
   );
 }

@@ -1,12 +1,12 @@
  // eslint-disable-next-line
 import React, { Component } from 'react';
 import { Query } from "react-apollo";
-import gql from "graphql-tag";
 import CanvasJSReact from '../../canvasjs.react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
+import {QUERY_BY_COUNTRY} from '../QueryComponent/QueryComponent.js'
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const cache = new InMemoryCache();
@@ -21,20 +21,6 @@ const client = new ApolloClient({
 
 var today = new Date();
 var date=today.getDate() + "-"+ parseInt(today.getMonth()+1) +"-"+today.getFullYear();
-// $countryValue: String!,
-const queryResults = gql`
-  query queryResults($country: [String], $today:String!){
-    results (countries: $country, date: { lt: $today }) {
-      country {
-        name
-      }
-      date
-      confirmed
-      deaths
-      recovered
-    }
-  }`;
-
 
 export class GraphComponent extends Component {
   constructor(props) {
@@ -47,7 +33,7 @@ export class GraphComponent extends Component {
   return (
     <ApolloProvider client={client}>
       <Query
-        query={queryResults} 
+        query={QUERY_BY_COUNTRY} 
         variables = {{country: countrySelected, today: date}}
       >
         {({ loading, error, data }) => {
@@ -66,13 +52,15 @@ export class GraphComponent extends Component {
           const options = {
             animationEnabled: true,	
             title:{
-              text: "Covid 19 Data"
+              text: "Covid 19 Data",
+              fontFamily: "Helvetica",
             },
-            height:420,
-            width:1200,
+            height:300,
+            width:800,
             axisY : {
               title: "NumberOfCases",
-              includeZero: true
+              includeZero: true,
+              fontFamily: "Helvetica"
             },
             toolTip: {
               shared: true
@@ -81,19 +69,22 @@ export class GraphComponent extends Component {
               type: "spline",
               name: "confirmed",
               showInLegend: true,
-              dataPoints: confirmed_array
+              dataPoints: confirmed_array,
+              fontFamily: "Helvetica"
             },
             {
               type: "spline",
               name: "death",
               showInLegend: true,
-              dataPoints: death_case_array
+              dataPoints: death_case_array,
+              fontFamily: "Helvetica"
             },
             {
               type: "spline",
               name: "recovered",
               showInLegend: true,
-              dataPoints: recovered_array
+              dataPoints: recovered_array,
+              fontFamily: "Helvetica"
             }]
           }
 
