@@ -5,6 +5,8 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import {QUERY_BY_COUNTRY} from '../QueryComponent/QueryComponent.js'
+import 'bootstrap/dist/css/bootstrap.css';
+import './CardComponent.css';
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
@@ -42,12 +44,25 @@ export class CardComponent extends Component {
           console.log(todays_data)
 
           return(
-            <div>
-              <p>The country you selected is {todays_data.country.name}</p>
-              <p>as of {todays_data.date}, here are the stats about covid19</p>
-              <p>Confimed: {todays_data.confirmed}</p>
-              <p>Deaths: {todays_data.deaths}</p>
-              <p>Recovered: {todays_data.recovered}</p>
+            <div class="card-deck">
+              <div class="card border-warning mb-3" style={{backgroundColor: "rgba(255, 240, 189, 0.3)"}}>
+                <div class="card-body text-warning">
+                  <h5 class="card-title" style={{fontFamily: "Helvetica"}}>Confirmed</h5>
+                  <h3 class="card-text">{todays_data.confirmed}</h3>
+                </div>
+              </div>
+              <div class="card border-success mb-3" style={{backgroundColor: "rgba(183, 255, 173, 0.2)"}}>
+                <div class="card-body text-success">
+                  <h5 class="card-title">Recovered</h5>
+                  <h3 class="card-text">{todays_data.recovered}</h3>
+                </div>
+              </div>
+              <div class="card border-danger mb-3"  style={{backgroundColor: "rgba(250, 0, 0, 0.2)"}}>
+                <div class="card-body text-danger">
+                  <h5 class="card-title">Deaths</h5>
+                  <h3 class="card-text">{todays_data.deaths}</h3>
+                </div>
+              </div>
             </div>
           );
         }}

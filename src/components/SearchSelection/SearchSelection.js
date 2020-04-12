@@ -8,7 +8,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { GraphComponent } from '../GraphComponent/GraphComponent.js';
 import { CardComponent } from '../CardComponent/CardComponent.js';
-
+import 'bootstrap/dist/css/bootstrap.css';
+import './SearchSelection.css';
 const cache = new InMemoryCache();
 const link = new HttpLink({
   uri: 'https://covid19-graphql.now.sh/'
@@ -54,20 +55,22 @@ export class SearchSelection extends Component {
           data && data.countries && data.countries.map((country) => {
             country_array.push({value: country.name, label: country.name})
           });
-          console.log(country_array)
                 
         return(
-          <div>
-            <Select
-              value={selectedOption}
-              onChange={this.handleChange}
-              options={country_array}
-            />
-            <br />
-            <CardComponent countrySelected={selectedOption}/>
-            <br />
-            <GraphComponent countrySelected={selectedOption}/>
-          </div>
+        
+            <div class="content" style={{maxWidth: '50rem'}}>
+              <h3 style={{ fontFamily: "Helvetica", fontSize: "20px", color: "#4d4d4d"}}>Please Select A Country</h3>
+              <Select
+                value={selectedOption}
+                onChange={this.handleChange}
+                options={country_array}
+                placeholder="Select"
+              />
+              <br />
+              <CardComponent countrySelected={selectedOption} style={{marginTop: "100px"}}/>
+              <br />
+              <GraphComponent countrySelected={selectedOption}/>
+            </div>
         );
         
         }}

@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import './Navigation.css';
 
 export class Navigation extends Component {
   render() {

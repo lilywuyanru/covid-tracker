@@ -1,0 +1,10 @@
+.card-deck {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.card {
+  max-width: 18rem;
+  border-width: 1px;
+  border-radius: 12px;
+}
