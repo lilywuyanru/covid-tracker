@@ -52,6 +52,7 @@ export class SearchSelection extends Component {
             
           var country_array = [];
         
+          console.log(data)
           data && data.countries && data.countries.map((country) => {
             country_array.push({value: country.name, label: country.name})
           });

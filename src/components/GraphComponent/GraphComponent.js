@@ -20,7 +20,7 @@ const client = new ApolloClient({
 })
 
 var today = new Date();
-var date=today.getDate() + "-"+ parseInt(today.getMonth()+1) +"-"+today.getFullYear();
+var date=parseInt(today.getMonth()+1) + "/" + today.getDate() + "/"+today.getFullYear();
 
 export class GraphComponent extends Component {
   constructor(props) {

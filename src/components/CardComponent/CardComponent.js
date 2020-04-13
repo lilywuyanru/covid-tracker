@@ -19,7 +19,7 @@ const client = new ApolloClient({
 })
 
 var today = new Date();
-var date=today.getDate() + "-"+ parseInt(today.getMonth()+1) +"-"+today.getFullYear();
+var date=parseInt(today.getMonth()+1) + "/" + today.getDate() + "/"+today.getFullYear();
 
 export class CardComponent extends Component {
   constructor(props) {
@@ -28,7 +28,9 @@ export class CardComponent extends Component {
 
   render() {
     const countrySelected = this.props.countrySelected.value;
+
     console.log("render card component")
+    console.log(date)
   return (
     <ApolloProvider client={client}>
       <Query
