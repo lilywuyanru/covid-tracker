@@ -68,7 +68,7 @@ export class SearchSelection extends Component {
                 placeholder="Select"
               />
               <br />
-              <CardComponent countrySelected={selectedOption} style={{marginTop: "100px"}}/>
+              <CardComponent countrySelected={selectedOption}/>
               <br />
               <GraphComponent countrySelected={selectedOption}/>
             </div>
